@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "danotes-788ce": {
+      "hosting": {
+        "da-keep": [
+          "danotes-788ce"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "danotes-788ce"
+  }
+}
