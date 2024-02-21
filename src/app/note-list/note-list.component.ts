@@ -9,20 +9,26 @@ import { NoteListService } from '../firebase-services/note-list.service'
   styleUrls: ['./note-list.component.scss']
 })
 export class NoteListComponent {
-  // noteList: Note[] = [];
+  noteList: Note[] = [];
   favFilter: "all" | "fav" = "all";
   status: "notes" | "trash" = "notes";
 
   constructor(private noteService: NoteListService) {
-    // this.noteList = this.getNotesList();
+    this.noteList = this.getStatus();
   }
 
+
   getStatus(){
-    if (this.status != 'trash') {
-      return this.noteService.normalNotes;
+    if (this.status == 'notes') {
+      if(this.favFilter == 'all'){ 
+        return this.noteService.normalNotes; //zeige alle an
+      } else {
+        return this.noteService.normalMarkedNotes;//zeige nur die an, die den filter auf fav haben 
+      }
+      
     } else {
-      return this.noteService.trashNotes;
-    }
+      return this.noteService.trashNotes;//zeige trash an
+    } 
   }
   // getNotesList(): Note[]{
   //   return this.noteService.normalNotes;
@@ -33,7 +39,7 @@ export class NoteListComponent {
   // }
 
 
-  changeFavFilter(filter: "all" | "fav") {
+  changeFavFilter(filter: "all" | "fav") { // vergebe den status vom filter durch onclick
     this.favFilter = filter;
   }
 
